@@ -72,8 +72,23 @@
         } else {
             labelTapped.textColor = [UIColor redColor];
         }
-        
-        [self.game changePlayer];
+
+        [self.game.currentPlayer addMove:@(labelTapped.tag)];
+
+        NSString *winner = [self.game whoWon];
+        if (winner) {
+            // Show an alert
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Game Over" message:[NSString stringWithFormat:@"%@ wins!", self.game.currentPlayer.token] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Start New Game" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                // Start new game
+                NSLog(@"Start a new game");
+            }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            [self.game changePlayer];
+        }
+
     }
 }
 

@@ -19,5 +19,6 @@
 
 - (void)setPlayerOneToken:(NSString *)token;
 - (void)changePlayer;
+- (NSString *)whoWon;
 
 @end

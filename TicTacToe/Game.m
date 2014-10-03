@@ -30,6 +30,27 @@
     }
 }
 
+- (NSString *)whoWon {
+    if (([self.currentPlayer.moves containsObject:@(1)] && [self.currentPlayer.moves containsObject:@(2)] && [self.currentPlayer.moves containsObject:@(3)]) ||
+        ([self.currentPlayer.moves containsObject:@(4)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(6)]) ||
+        ([self.currentPlayer.moves containsObject:@(7)] && [self.currentPlayer.moves containsObject:@(8)] && [self.currentPlayer.moves containsObject:@(9)])) {
+        return self.currentPlayer.token;
+    }
+
+    else if (([self.currentPlayer.moves containsObject:@(1)] && [self.currentPlayer.moves containsObject:@(4)] && [self.currentPlayer.moves containsObject:@(7)]) ||
+             ([self.currentPlayer.moves containsObject:@(2)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(8)]) ||
+             ([self.currentPlayer.moves containsObject:@(3)] && [self.currentPlayer.moves containsObject:@(6)] && [self.currentPlayer.moves containsObject:@(9)])) {
+        return self.currentPlayer.token;
+    }
+
+    else if (([self.currentPlayer.moves containsObject:@(1)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(9)]) ||
+             ([self.currentPlayer.moves containsObject:@(3)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(7)])) {
+        return self.currentPlayer.token;
+    }
+    
+    return nil;
+}
+
 #pragma mark - Accessors
 
 - (Player *)playerOne {
