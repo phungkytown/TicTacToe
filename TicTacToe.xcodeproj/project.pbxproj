@@ -14,6 +14,8 @@
 		2C8B2B7119DF03AE00EC9FEE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8B2B6F19DF03AE00EC9FEE /* LaunchScreen.xib */; };
 		2C8B2B7D19DF03AE00EC9FEE /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B7C19DF03AE00EC9FEE /* TicTacToeTests.m */; };
 		2C8B2B8819DF051400EC9FEE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B8719DF051400EC9FEE /* GameViewController.m */; };
+		2C8B2B8B19DF074300EC9FEE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B8A19DF074300EC9FEE /* Game.m */; };
+		2C8B2B8E19DF08BA00EC9FEE /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B8D19DF08BA00EC9FEE /* Player.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		2C8B2B7C19DF03AE00EC9FEE /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
 		2C8B2B8619DF051400EC9FEE /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		2C8B2B8719DF051400EC9FEE /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		2C8B2B8919DF074300EC9FEE /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		2C8B2B8A19DF074300EC9FEE /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		2C8B2B8C19DF08BA00EC9FEE /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		2C8B2B8D19DF08BA00EC9FEE /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,10 @@
 				2C8B2B6D19DF03AE00EC9FEE /* Images.xcassets */,
 				2C8B2B6F19DF03AE00EC9FEE /* LaunchScreen.xib */,
 				2C8B2B6019DF03AE00EC9FEE /* Supporting Files */,
+				2C8B2B8919DF074300EC9FEE /* Game.h */,
+				2C8B2B8A19DF074300EC9FEE /* Game.m */,
+				2C8B2B8C19DF08BA00EC9FEE /* Player.h */,
+				2C8B2B8D19DF08BA00EC9FEE /* Player.m */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -222,6 +232,8 @@
 				2C8B2B6619DF03AE00EC9FEE /* AppDelegate.m in Sources */,
 				2C8B2B8819DF051400EC9FEE /* GameViewController.m in Sources */,
 				2C8B2B6319DF03AE00EC9FEE /* main.m in Sources */,
+				2C8B2B8B19DF074300EC9FEE /* Game.m in Sources */,
+				2C8B2B8E19DF08BA00EC9FEE /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
