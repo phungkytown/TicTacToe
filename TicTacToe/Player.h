@@ -11,7 +11,7 @@
 @interface Player : NSObject
 
 @property (nonatomic) NSString *token;
-@property (nonatomic, strong) NSMutableArray *moves;
+@property (nonatomic, strong, readonly) NSArray *moves;
 
 - (void)addMove:(id)move;
 

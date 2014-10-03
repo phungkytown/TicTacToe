@@ -87,6 +87,10 @@
 		2C8B2B5F19DF03AE00EC9FEE /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				2C8B2B8919DF074300EC9FEE /* Game.h */,
+				2C8B2B8A19DF074300EC9FEE /* Game.m */,
+				2C8B2B8C19DF08BA00EC9FEE /* Player.h */,
+				2C8B2B8D19DF08BA00EC9FEE /* Player.m */,
 				2C8B2B6419DF03AE00EC9FEE /* AppDelegate.h */,
 				2C8B2B6519DF03AE00EC9FEE /* AppDelegate.m */,
 				2C8B2B8619DF051400EC9FEE /* GameViewController.h */,
@@ -95,10 +99,6 @@
 				2C8B2B6D19DF03AE00EC9FEE /* Images.xcassets */,
 				2C8B2B6F19DF03AE00EC9FEE /* LaunchScreen.xib */,
 				2C8B2B6019DF03AE00EC9FEE /* Supporting Files */,
-				2C8B2B8919DF074300EC9FEE /* Game.h */,
-				2C8B2B8A19DF074300EC9FEE /* Game.m */,
-				2C8B2B8C19DF08BA00EC9FEE /* Player.h */,
-				2C8B2B8D19DF08BA00EC9FEE /* Player.m */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";

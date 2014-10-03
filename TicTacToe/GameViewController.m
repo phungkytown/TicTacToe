@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) Game *game;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *gameBoardLabels;
+@property (weak, nonatomic) IBOutlet UILabel *xGamePiece;
+@property (weak, nonatomic) IBOutlet UILabel *oGamePiece;
 
 @end
 
@@ -21,9 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-    self.navigationItem.title = @"TicTacToe";
+    [self resetGameBoard];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -58,37 +58,76 @@
     return nil;
 }
 
+- (void)resetGameBoard {
+    self.navigationItem.title = @"TicTactoe";
+
+    for (UILabel *label in self.gameBoardLabels) {
+        label.text = @"";
+    }
+}
+
+- (void)startNewGame {
+    self.game = nil;
+    [self resetGameBoard];
+    [self setupGame];
+}
+
+- (void)markGameBoardLabel:(UILabel *)gameBoardLabel {
+    // Set the attributes of the label
+    gameBoardLabel.text = self.game.currentPlayer.token;
+
+    if ([self.game.currentPlayer.token isEqualToString:@"X"]) {
+        gameBoardLabel.textColor = [UIColor blueColor];
+    } else {
+        gameBoardLabel.textColor = [UIColor redColor];
+    }
+
+    // Add the move to the current player's array
+    [self.game.currentPlayer addMove:@(gameBoardLabel.tag)];
+
+    // Check for a winner.
+    NSString *winner = [self.game whoWon];
+    if (winner) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Game Over" message:[NSString stringWithFormat:@"%@ wins!", self.game.currentPlayer.token] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Start New Game" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self startNewGame];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        [self.game changePlayer];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)tapGesture {
     CGPoint tapLocation = [tapGesture locationInView:self.view];
 
-    UILabel *labelTapped = [self findLabelUsingPoint:tapLocation];
-    if (labelTapped) {
-        labelTapped.text = self.game.currentPlayer.token;
+    UILabel *labelFound = [self findLabelUsingPoint:tapLocation];
+    if (labelFound) {
+        [self markGameBoardLabel:labelFound];
+    }
+}
 
-        if ([self.game.currentPlayer.token isEqualToString:@"X"]) {
-            labelTapped.textColor = [UIColor blueColor];
-        } else {
-            labelTapped.textColor = [UIColor redColor];
+- (IBAction)onLabelDrag:(UIPanGestureRecognizer *)panGesture {
+    CGPoint panLocation = [panGesture locationInView:self.view];
+
+    UILabel *gamePiece;
+    if ([self.game.currentPlayer.token isEqualToString:@"X"]) {
+        gamePiece = self.xGamePiece;
+    } else {
+        gamePiece = self.oGamePiece;
+    }
+
+    gamePiece.center = panLocation;
+
+    if (panGesture.state == UIGestureRecognizerStateEnded) {
+        UILabel *labelFound = [self findLabelUsingPoint:panLocation];
+        if (labelFound) {
+            [self markGameBoardLabel:labelFound];
         }
-
-        [self.game.currentPlayer addMove:@(labelTapped.tag)];
-
-        NSString *winner = [self.game whoWon];
-        if (winner) {
-            // Show an alert
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Game Over" message:[NSString stringWithFormat:@"%@ wins!", self.game.currentPlayer.token] preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Start New Game" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                // Start new game
-                NSLog(@"Start a new game");
-            }];
-            [alertController addAction:okAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        } else {
-            [self.game changePlayer];
-        }
-
     }
 }
 
