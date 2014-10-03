@@ -17,7 +17,7 @@
 @property (nonatomic, strong) Player *playerOne;
 @property (nonatomic, strong) Player *playerTwo;
 
-- (void)setPlayerOneToken:(NSInteger)token;
+- (void)setPlayerOneToken:(NSString *)token;
 - (void)changePlayer;
 
 @end

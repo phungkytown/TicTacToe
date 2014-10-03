@@ -8,14 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, PlayerToken) {
-    X,
-    O
-};
-
 @interface Player : NSObject
 
-@property (nonatomic) PlayerToken token;
+@property (nonatomic) NSString *token;
 @property (nonatomic, strong) NSMutableArray *moves;
 
 - (void)addMove:(id)move;

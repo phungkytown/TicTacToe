@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.navigationItem.title = @"TicTacToe";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -33,16 +35,46 @@
 - (void)setupGame {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Play as X or O?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *xTokenAction = [UIAlertAction actionWithTitle:@"X" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.game setPlayerOneToken:X];
+        [self.game setPlayerOneToken:@"X"];
+        self.game.currentPlayer = self.game.playerOne;
+        self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
     }];
     UIAlertAction *oTokenAction = [UIAlertAction actionWithTitle:@"O" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.game setPlayerOneToken:O];
+        [self.game setPlayerOneToken:@"O"];
+        self.game.currentPlayer = self.game.playerOne;
+        self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
     }];
     [alertController addAction:xTokenAction];
     [alertController addAction:oTokenAction];
-    [self presentViewController:alertController animated:YES completion:^{
-        self.game.currentPlayer = self.game.playerOne;
-    }];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (UILabel *)findLabelUsingPoint:(CGPoint)point {
+    for (UILabel *label in self.gameBoardLabels) {
+        if (CGRectContainsPoint(label.frame, point)) {
+            return label;
+        }
+    }
+    return nil;
+}
+
+#pragma mark - Actions
+
+- (IBAction)onLabelTapped:(UITapGestureRecognizer *)tapGesture {
+    CGPoint tapLocation = [tapGesture locationInView:self.view];
+
+    UILabel *labelTapped = [self findLabelUsingPoint:tapLocation];
+    if (labelTapped) {
+        labelTapped.text = self.game.currentPlayer.token;
+
+        if ([self.game.currentPlayer.token isEqualToString:@"X"]) {
+            labelTapped.textColor = [UIColor blueColor];
+        } else {
+            labelTapped.textColor = [UIColor redColor];
+        }
+        
+        [self.game changePlayer];
+    }
 }
 
 #pragma mark - Accessors

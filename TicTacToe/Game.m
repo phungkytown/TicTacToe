@@ -11,14 +11,14 @@
 
 @implementation Game
 
-- (void)setPlayerOneToken:(NSInteger)token {
+- (void)setPlayerOneToken:(NSString *)token {
     self.playerOne.token = token;
 
     // Go ahead and set player two's token.
-    if (token == X) {
-        self.playerTwo.token = O;
+    if ([token isEqualToString:@"X"]) {
+        self.playerTwo.token = @"O";
     } else {
-        self.playerTwo.token = X;
+        self.playerTwo.token = @"X";
     }
 }
 
