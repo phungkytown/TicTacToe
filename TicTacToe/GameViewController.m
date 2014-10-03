@@ -88,12 +88,12 @@
     }
 
     // Add the move to the current player's array
-    [self.game.currentPlayer addMove:@(gameBoardLabel.tag)];
+    [self.game addPlayerMove:@(gameBoardLabel.tag)];
 
     // Check for a winner.
     NSString *winner = [self.game whoWon];
     if (winner) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Game Over" message:[NSString stringWithFormat:@"%@ wins!", self.game.currentPlayer.token] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Game Over" message:winner preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Start New Game" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self startNewGame];
         }];

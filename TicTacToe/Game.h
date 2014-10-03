@@ -16,9 +16,11 @@
 @property (nonatomic, strong) Player *currentPlayer;
 @property (nonatomic, strong) Player *playerOne;
 @property (nonatomic, strong) Player *playerTwo;
+@property (nonatomic, strong) NSMutableArray *totalMoves;
 
 - (void)setPlayerOneToken:(NSString *)token;
 - (void)changePlayer;
+- (void)addPlayerMove:(id)move;
 - (NSString *)whoWon;
 
 @end

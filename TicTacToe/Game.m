@@ -30,22 +30,31 @@
     }
 }
 
+-(void)addPlayerMove:(id)move {
+    [self.totalMoves addObject:move];
+    [self.currentPlayer addMove:move];
+}
+
 - (NSString *)whoWon {
     if (([self.currentPlayer.moves containsObject:@(1)] && [self.currentPlayer.moves containsObject:@(2)] && [self.currentPlayer.moves containsObject:@(3)]) ||
         ([self.currentPlayer.moves containsObject:@(4)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(6)]) ||
         ([self.currentPlayer.moves containsObject:@(7)] && [self.currentPlayer.moves containsObject:@(8)] && [self.currentPlayer.moves containsObject:@(9)])) {
-        return self.currentPlayer.token;
+        return [NSString stringWithFormat:@"%@ wins!", self.currentPlayer.token];
     }
 
     else if (([self.currentPlayer.moves containsObject:@(1)] && [self.currentPlayer.moves containsObject:@(4)] && [self.currentPlayer.moves containsObject:@(7)]) ||
              ([self.currentPlayer.moves containsObject:@(2)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(8)]) ||
              ([self.currentPlayer.moves containsObject:@(3)] && [self.currentPlayer.moves containsObject:@(6)] && [self.currentPlayer.moves containsObject:@(9)])) {
-        return self.currentPlayer.token;
+        return [NSString stringWithFormat:@"%@ wins!", self.currentPlayer.token];
     }
 
     else if (([self.currentPlayer.moves containsObject:@(1)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(9)]) ||
              ([self.currentPlayer.moves containsObject:@(3)] && [self.currentPlayer.moves containsObject:@(5)] && [self.currentPlayer.moves containsObject:@(7)])) {
-        return self.currentPlayer.token;
+        return [NSString stringWithFormat:@"%@ wins!", self.currentPlayer.token];
+    }
+
+    if ([self.totalMoves count] == 9) {
+        return @"Stalemate";
     }
     
     return nil;
@@ -65,6 +74,13 @@
         _playerTwo = [[Player alloc] init];
     }
     return _playerTwo;
+}
+
+- (NSMutableArray *)totalMoves {
+    if (!_totalMoves) {
+        _totalMoves = [NSMutableArray array];
+    }
+    return _totalMoves;
 }
 
 @end
