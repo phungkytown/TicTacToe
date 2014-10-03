@@ -27,12 +27,17 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self setupGame];
+    if (!self.game) {
+        [self setupGame];
+    }
 }
 
 #pragma mark - Helper Methods
 
 - (void)setupGame {
+    // Initialize an instance of a new game
+    self.game = [[Game alloc] init];
+
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Play as X or O?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *xTokenAction = [UIAlertAction actionWithTitle:@"X" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self.game setPlayerOneToken:@"X"];
@@ -134,12 +139,5 @@
 #pragma mark - Accessors
 
 // Lazy instantiation.
-
-- (Game *)game {
-    if (!_game) {
-        _game = [[Game alloc] init];
-    }
-    return _game;
-}
 
 @end

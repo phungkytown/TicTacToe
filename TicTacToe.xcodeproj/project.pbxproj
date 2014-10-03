@@ -16,6 +16,7 @@
 		2C8B2B8819DF051400EC9FEE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B8719DF051400EC9FEE /* GameViewController.m */; };
 		2C8B2B8B19DF074300EC9FEE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B8A19DF074300EC9FEE /* Game.m */; };
 		2C8B2B8E19DF08BA00EC9FEE /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B8D19DF08BA00EC9FEE /* Player.m */; };
+		2C8B2B9119DF469A00EC9FEE /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B2B9019DF469A00EC9FEE /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		2C8B2B8A19DF074300EC9FEE /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		2C8B2B8C19DF08BA00EC9FEE /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		2C8B2B8D19DF08BA00EC9FEE /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		2C8B2B8F19DF469A00EC9FEE /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		2C8B2B9019DF469A00EC9FEE /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				2C8B2B6519DF03AE00EC9FEE /* AppDelegate.m */,
 				2C8B2B8619DF051400EC9FEE /* GameViewController.h */,
 				2C8B2B8719DF051400EC9FEE /* GameViewController.m */,
+				2C8B2B8F19DF469A00EC9FEE /* WebViewController.h */,
+				2C8B2B9019DF469A00EC9FEE /* WebViewController.m */,
 				2C8B2B6A19DF03AE00EC9FEE /* Main.storyboard */,
 				2C8B2B6D19DF03AE00EC9FEE /* Images.xcassets */,
 				2C8B2B6F19DF03AE00EC9FEE /* LaunchScreen.xib */,
@@ -230,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C8B2B6619DF03AE00EC9FEE /* AppDelegate.m in Sources */,
+				2C8B2B9119DF469A00EC9FEE /* WebViewController.m in Sources */,
 				2C8B2B8819DF051400EC9FEE /* GameViewController.m in Sources */,
 				2C8B2B6319DF03AE00EC9FEE /* main.m in Sources */,
 				2C8B2B8B19DF074300EC9FEE /* Game.m in Sources */,
