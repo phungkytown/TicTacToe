@@ -22,7 +22,7 @@
     }
 }
 
-- (void)changePlayer {
+- (void)nextTurn {
     if (self.currentPlayer == self.playerOne) {
         self.currentPlayer = self.playerTwo;
     } else {
@@ -54,7 +54,7 @@
     }
 
     if ([self.totalMoves count] == 9) {
-        return @"Stalemate";
+        return @"Draw";
     }
     
     return nil;

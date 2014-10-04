@@ -14,8 +14,10 @@
 
 @property (nonatomic, strong) Game *game;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *gameBoardLabels;
-@property (weak, nonatomic) IBOutlet UILabel *xGamePiece;
-@property (weak, nonatomic) IBOutlet UILabel *oGamePiece;
+@property (nonatomic, weak) IBOutlet UILabel *xGamePiece;
+@property (nonatomic, weak) IBOutlet UILabel *oGamePiece;
+@property (nonatomic, weak) IBOutlet UIButton *playComputerButton;
+@property (nonatomic, weak) NSTimer *timer;
 
 @end
 
@@ -38,6 +40,7 @@
     // Initialize an instance of a new game
     self.game = [[Game alloc] init];
 
+    // Let the user play as X or O.
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Play as X or O?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *xTokenAction = [UIAlertAction actionWithTitle:@"X" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self.game setPlayerOneToken:@"X"];
@@ -65,9 +68,9 @@
 
 - (void)resetGameBoard {
     self.navigationItem.title = @"TicTactoe";
-
     for (UILabel *label in self.gameBoardLabels) {
         label.text = @"";
+        label.backgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
     }
 }
 
@@ -82,9 +85,9 @@
     gameBoardLabel.text = self.game.currentPlayer.token;
 
     if ([self.game.currentPlayer.token isEqualToString:@"X"]) {
-        gameBoardLabel.textColor = [UIColor blueColor];
+        gameBoardLabel.backgroundColor = [UIColor colorWithRed:60.0/255.0 green:78.0/255.0 blue:109.0/255.0 alpha:1.0];
     } else {
-        gameBoardLabel.textColor = [UIColor redColor];
+        gameBoardLabel.backgroundColor = [UIColor colorWithRed:218.0/255.0 green:97.0/255.0 blue:99.0/255.0 alpha:1.0];
     }
 
     // Add the move to the current player's array
@@ -100,7 +103,7 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        [self.game changePlayer];
+        [self.game nextTurn];
         self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
     }
 }
@@ -111,9 +114,9 @@
     CGPoint tapLocation = [tapGesture locationInView:self.view];
 
     UILabel *labelFound = [self findLabelUsingPoint:tapLocation];
-    if (labelFound) {
+    if (labelFound && (labelFound.text.length == 0)) {
         [self markGameBoardLabel:labelFound];
-    }
+    } 
 }
 
 - (IBAction)onLabelDrag:(UIPanGestureRecognizer *)panGesture {
@@ -130,14 +133,10 @@
 
     if (panGesture.state == UIGestureRecognizerStateEnded) {
         UILabel *labelFound = [self findLabelUsingPoint:panLocation];
-        if (labelFound) {
+        if (labelFound && (labelFound.text.length == 0)) {
             [self markGameBoardLabel:labelFound];
         }
     }
 }
-
-#pragma mark - Accessors
-
-// Lazy instantiation.
 
 @end

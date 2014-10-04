@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *totalMoves;
 
 - (void)setPlayerOneToken:(NSString *)token;
-- (void)changePlayer;
+- (void)nextTurn;
 - (void)addPlayerMove:(id)move;
 - (NSString *)whoWon;
 
