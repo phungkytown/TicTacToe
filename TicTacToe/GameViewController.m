@@ -46,11 +46,14 @@
         [self.game setPlayerOneToken:@"X"];
         self.game.currentPlayer = self.game.playerOne;
         self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
+        [self switchGamePiece];
     }];
     UIAlertAction *oTokenAction = [UIAlertAction actionWithTitle:@"O" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self.game setPlayerOneToken:@"O"];
         self.game.currentPlayer = self.game.playerOne;
         self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
+        self.oGamePiece.hidden = NO;
+        [self switchGamePiece];
     }];
     [alertController addAction:xTokenAction];
     [alertController addAction:oTokenAction];
@@ -72,6 +75,8 @@
         label.text = @"";
         label.backgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
     }
+    self.xGamePiece.hidden = YES;
+    self.oGamePiece.hidden = YES;
 }
 
 - (void)startNewGame {
@@ -104,7 +109,18 @@
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
         [self.game nextTurn];
+        [self switchGamePiece];
         self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
+    }
+}
+
+- (void)switchGamePiece {
+    if (self.game.currentPlayer == self.game.playerOne) {
+        self.xGamePiece.hidden = NO;
+        self.oGamePiece.hidden = YES;
+    } else {
+        self.xGamePiece.hidden = YES;
+        self.oGamePiece.hidden = NO;
     }
 }
 
@@ -116,7 +132,7 @@
     UILabel *labelFound = [self findLabelUsingPoint:tapLocation];
     if (labelFound && (labelFound.text.length == 0)) {
         [self markGameBoardLabel:labelFound];
-    } 
+    }
 }
 
 - (IBAction)onLabelDrag:(UIPanGestureRecognizer *)panGesture {
