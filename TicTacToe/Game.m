@@ -11,11 +11,22 @@
 
 @interface Game ()
 
+// Contains the moves for both players.
 @property (nonatomic, strong) NSMutableArray *currentMoves;
 
 @end
 
 @implementation Game
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        // Player one goes first.
+        _currentPlayer = self.playerOne;
+        _secondsPerTurn = 10;
+    }
+    return self;
+}
 
 - (void)setPlayerOneToken:(NSString *)token {
     self.playerOne.token = token;

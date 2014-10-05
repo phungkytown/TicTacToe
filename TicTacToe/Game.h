@@ -15,6 +15,7 @@
 @property (nonatomic, strong) Player *currentPlayer;
 @property (nonatomic, strong) Player *playerOne;
 @property (nonatomic, strong) Player *playerTwo;
+@property (nonatomic) NSTimeInterval secondsPerTurn;
 
 
 - (void)setPlayerOneToken:(NSString *)token;

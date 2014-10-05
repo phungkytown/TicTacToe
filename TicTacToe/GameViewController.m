@@ -17,6 +17,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *playerOneGamePiece;
 @property (nonatomic, weak) IBOutlet UILabel *playerTwoGamePiece;
 @property (nonatomic, weak) IBOutlet UIButton *robotButton;
+@property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic, weak) IBOutlet UILabel *timerLabel;
+@property (nonatomic) NSTimeInterval secondsPerTurn;
 
 @end
 
@@ -54,7 +57,6 @@
 
 - (void)configurePlayerOneWithToken:(NSString *)token {
     [self.game setPlayerOneToken:token];
-    self.game.currentPlayer = self.game.playerOne;
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s Turn", self.game.currentPlayer.token];
     self.playerOneGamePiece.text = self.game.currentPlayer.token;
 
@@ -69,6 +71,7 @@
     }
 
     self.playerOneGamePiece.hidden = NO;
+    [self startTimer];
 }
 
 - (UILabel *)findLabelUsingPoint:(CGPoint)point {
@@ -89,23 +92,8 @@
     return nil;
 }
 
-- (void)resetGameBoard {
-    self.navigationItem.title = @"TicTactoe";
-    for (UILabel *label in self.gameBoardLabels) {
-        label.text = @"";
-        label.backgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
-    }
-    self.playerOneGamePiece.hidden = YES;
-    self.playerTwoGamePiece.hidden = YES;
-}
-
-- (void)startNewGame {
-    self.game = nil;
-    [self resetGameBoard];
-    [self setupGame];
-}
-
 - (void)markGameBoardLabel:(UILabel *)gameBoardLabel {
+    [self cancelTimer];
     // Set the attributes of the label
     gameBoardLabel.text = self.game.currentPlayer.token;
 
@@ -134,16 +122,18 @@
 }
 
 - (void)changePlayerTurn {
+    // Cancel the timer if it's currently running.
+    [self cancelTimer];
+
     [self.game nextTurn];
     [self switchGamePiece];
+    [self startTimer];
     if (self.game.currentPlayer.isRobot) {
         // Give the impression that the robot is thinking.
-        // Anywhere between 1 and 5 seconds.
         [self.robotButton setTitle:@"Thinking ..." forState:UIControlStateNormal];
-        NSUInteger randomSeconds = arc4random_uniform(5) + 1;
+        NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn) + 1;
         [self performSelector:@selector(robotMakesSelection) withObject:nil afterDelay:randomSeconds];
     }
-
 }
 
 - (void)switchGamePiece {
@@ -162,6 +152,48 @@
     if (labelFound) {
         [self markGameBoardLabel:labelFound];
         [self.robotButton setTitle:@"Robot is ON" forState:UIControlStateNormal];
+    }
+}
+
+- (void)resetGameBoard {
+    self.navigationItem.title = @"TicTactoe";
+    for (UILabel *label in self.gameBoardLabels) {
+        label.text = @"";
+        label.backgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
+    }
+    self.playerOneGamePiece.hidden = YES;
+    self.playerTwoGamePiece.hidden = YES;
+    self.timerLabel.text = @"0:00";
+}
+
+- (void)startNewGame {
+    self.game = nil;
+    [self resetGameBoard];
+    [self setupGame];
+}
+
+#pragma mark - Timer Methods
+
+- (void)startTimer {
+    self.secondsPerTurn = self.game.secondsPerTurn;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
+    self.timerLabel.text = [NSString stringWithFormat:@"%@", @(self.secondsPerTurn)];
+}
+
+- (void)updateTimerLabel {
+    self.secondsPerTurn--;
+    self.timerLabel.text = [NSString stringWithFormat:@"%@", @(self.secondsPerTurn)];
+
+    if ((self.secondsPerTurn) == 0) {
+        [self changePlayerTurn];
+        [self cancelTimer];
+    }
+}
+
+- (void)cancelTimer {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
     }
 }
 
@@ -211,7 +243,7 @@
         // Give the impression that the robot is thinking.
         // Anywhere between 1 and 5 seconds.
         [self.robotButton setTitle:@"Thinking ..." forState:UIControlStateNormal];
-        NSUInteger randomSeconds = arc4random_uniform(5) + 1;
+        NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn) + 1;
         [self performSelector:@selector(robotMakesSelection) withObject:nil afterDelay:randomSeconds];
     }
 }

@@ -106,6 +106,12 @@
                                     <action selector="onRobotButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uf0-uu-Zrz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQu-pw-9VT">
+                                <rect key="frame" x="146" y="118" width="92" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -125,6 +131,7 @@
                         <outlet property="playerOneGamePiece" destination="6qX-6p-h4N" id="Ocx-or-0UK"/>
                         <outlet property="playerTwoGamePiece" destination="dFY-A0-iWy" id="bs8-go-fnN"/>
                         <outlet property="robotButton" destination="nbG-U8-4N9" id="1uc-n4-6N0"/>
+                        <outlet property="timerLabel" destination="CQu-pw-9VT" id="gh0-T4-Nty"/>
                         <outletCollection property="gameBoardLabels" destination="XXM-bx-Dw4" id="V5b-kK-g6k"/>
                         <outletCollection property="gameBoardLabels" destination="Se0-Io-cX8" id="d37-Uj-bGc"/>
                         <outletCollection property="gameBoardLabels" destination="HEA-xA-wu8" id="wpg-K3-V96"/>
