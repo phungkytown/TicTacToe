@@ -130,7 +130,7 @@
     if (self.game.currentPlayer.isRobot) {
         // Give the impression that the robot is thinking.
         [self.robotButton setTitle:@"Thinking ..." forState:UIControlStateNormal];
-        NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn) + 1;
+        NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn);
         [self performSelector:@selector(robotMakesSelection) withObject:nil afterDelay:randomSeconds];
     }
 }
@@ -248,7 +248,7 @@
         // Give the impression that the robot is thinking.
         // Anywhere between 1 and 5 seconds.
         [self.robotButton setTitle:@"Thinking ..." forState:UIControlStateNormal];
-        NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn) + 1;
+        NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn);
         [self performSelector:@selector(robotMakesSelection) withObject:nil afterDelay:randomSeconds];
     }
 }
