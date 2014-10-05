@@ -9,6 +9,12 @@
 #import "Game.h"
 #import "Player.h"
 
+@interface Game ()
+
+@property (nonatomic, strong) NSMutableArray *currentMoves;
+
+@end
+
 @implementation Game
 
 - (void)setPlayerOneToken:(NSString *)token {
@@ -31,7 +37,7 @@
 }
 
 -(void)addPlayerMove:(id)move {
-    [self.totalMoves addObject:move];
+    [self.currentMoves addObject:move];
     [self.currentPlayer addMove:move];
 }
 
@@ -53,11 +59,25 @@
         return [NSString stringWithFormat:@"%@ wins!", self.currentPlayer.token];
     }
 
-    if ([self.totalMoves count] == 9) {
+    if ([self.currentMoves count] == 9) {
         return @"Draw";
     }
     
     return nil;
+}
+
+- (NSInteger)robotMove {
+    NSMutableArray *possibleMoves = [NSMutableArray arrayWithArray:@[@1, @2, @3, @4, @5, @6, @7, @8, @9]];
+    [possibleMoves removeObjectsInArray:self.currentMoves];
+
+    // Robot selects at random from the list of possible moves.
+    NSUInteger possibleMovesCount = [possibleMoves count];
+    NSInteger selectedMove;
+    if (possibleMovesCount > 0) {
+        selectedMove = [possibleMoves[arc4random_uniform((int32_t)possibleMovesCount)] integerValue];
+    }
+
+    return selectedMove;
 }
 
 #pragma mark - Accessors
@@ -76,11 +96,11 @@
     return _playerTwo;
 }
 
-- (NSMutableArray *)totalMoves {
-    if (!_totalMoves) {
-        _totalMoves = [NSMutableArray array];
+- (NSMutableArray *)currentMoves {
+    if (!_currentMoves) {
+        _currentMoves = [NSMutableArray array];
     }
-    return _totalMoves;
+    return _currentMoves;
 }
 
 @end

@@ -11,6 +11,7 @@
 @interface Player : NSObject
 
 @property (nonatomic) NSString *token;
+@property (nonatomic, getter = isRobot) BOOL robot;
 @property (nonatomic, strong, readonly) NSArray *moves;
 
 - (void)addMove:(id)move;

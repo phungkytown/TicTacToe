@@ -94,6 +94,18 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbG-U8-4N9">
+                                <rect key="frame" x="72" y="474" width="241" height="37"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Robot is OFF">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRobotButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uf0-uu-Zrz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -110,8 +122,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="oGamePiece" destination="dFY-A0-iWy" id="ii3-As-9lM"/>
-                        <outlet property="xGamePiece" destination="6qX-6p-h4N" id="Axq-20-U18"/>
+                        <outlet property="playerOneGamePiece" destination="6qX-6p-h4N" id="Ocx-or-0UK"/>
+                        <outlet property="playerTwoGamePiece" destination="dFY-A0-iWy" id="bs8-go-fnN"/>
+                        <outlet property="robotButton" destination="nbG-U8-4N9" id="1uc-n4-6N0"/>
                         <outletCollection property="gameBoardLabels" destination="XXM-bx-Dw4" id="V5b-kK-g6k"/>
                         <outletCollection property="gameBoardLabels" destination="Se0-Io-cX8" id="d37-Uj-bGc"/>
                         <outletCollection property="gameBoardLabels" destination="HEA-xA-wu8" id="wpg-K3-V96"/>

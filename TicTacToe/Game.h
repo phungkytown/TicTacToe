@@ -12,15 +12,15 @@
 
 @interface Game : NSObject
 
-@property (nonatomic, getter=isVsComputer) BOOL vsComputer;
 @property (nonatomic, strong) Player *currentPlayer;
 @property (nonatomic, strong) Player *playerOne;
 @property (nonatomic, strong) Player *playerTwo;
-@property (nonatomic, strong) NSMutableArray *totalMoves;
+
 
 - (void)setPlayerOneToken:(NSString *)token;
 - (void)nextTurn;
 - (void)addPlayerMove:(id)move;
 - (NSString *)whoWon;
+- (NSInteger)robotMove;
 
 @end
