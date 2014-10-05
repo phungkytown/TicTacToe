@@ -10,6 +10,11 @@
 #import "Game.h"
 #import "Player.h"
 
+#define kBlueColor [UIColor colorWithRed:60.0/255.0 green:78.0/255.0 blue:109.0/255.0 alpha:1.0]
+#define kRedColor [UIColor colorWithRed:218.0/255.0 green:97.0/255.0 blue:99.0/255.0 alpha:1.0]
+#define kLightGrayColor [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0]
+#define kGreenColor [UIColor colorWithRed:90.0/255.0 green:187.0/255.0 blue:181.0/255.0 alpha:1.0]
+
 @interface GameViewController ()
 
 @property (nonatomic, strong) Game *game;
@@ -61,13 +66,13 @@
     self.playerOneGamePiece.text = self.game.currentPlayer.token;
 
     if ([self.game.playerOne.token isEqualToString:@"X"]) {
-        self.playerOneGamePiece.backgroundColor = [UIColor colorWithRed:60.0/255.0 green:78.0/255.0 blue:109.0/255.0 alpha:1.0];
+        self.playerOneGamePiece.backgroundColor = kBlueColor;
         self.playerTwoGamePiece.text = @"O";
-        self.playerTwoGamePiece.backgroundColor = [UIColor colorWithRed:218.0/255.0 green:97.0/255.0 blue:99.0/255.0 alpha:1.0];
+        self.playerTwoGamePiece.backgroundColor = kRedColor;
     } else {
-        self.playerOneGamePiece.backgroundColor = [UIColor colorWithRed:218.0/255.0 green:97.0/255.0 blue:99.0/255.0 alpha:1.0];
+        self.playerOneGamePiece.backgroundColor = kRedColor;
         self.playerTwoGamePiece.text = @"X";
-        self.playerTwoGamePiece.backgroundColor = [UIColor colorWithRed:60.0/255.0 green:78.0/255.0 blue:109.0/255.0 alpha:1.0];
+        self.playerTwoGamePiece.backgroundColor = kBlueColor;
     }
 
     self.playerOneGamePiece.hidden = NO;
@@ -97,9 +102,9 @@
     gameBoardLabel.text = self.game.currentPlayer.token;
 
     if ([self.game.currentPlayer.token isEqualToString:@"X"]) {
-        gameBoardLabel.backgroundColor = [UIColor colorWithRed:60.0/255.0 green:78.0/255.0 blue:109.0/255.0 alpha:1.0];
+        gameBoardLabel.backgroundColor = kBlueColor;
     } else {
-        gameBoardLabel.backgroundColor = [UIColor colorWithRed:218.0/255.0 green:97.0/255.0 blue:99.0/255.0 alpha:1.0];
+        gameBoardLabel.backgroundColor = kRedColor;
     }
 
     // Add the move to the current player's array
@@ -159,7 +164,7 @@
     self.navigationItem.title = @"TicTactoe";
     for (UILabel *label in self.gameBoardLabels) {
         label.text = @"";
-        label.backgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
+        label.backgroundColor = kLightGrayColor;
     }
     self.playerOneGamePiece.hidden = YES;
     self.playerTwoGamePiece.hidden = YES;
@@ -252,7 +257,7 @@
     } else {
         self.game.playerTwo.robot = YES;
         [self.robotButton setTitle:@"Robot is ON" forState:UIControlStateNormal];
-        self.robotButton.backgroundColor = [UIColor colorWithRed:90.0/255.0 green:187.0/255.0 blue:181.0/255.0 alpha:1.0];
+        self.robotButton.backgroundColor = kGreenColor;
     }
 
     if (self.game.currentPlayer.isRobot) {
