@@ -96,6 +96,7 @@
 - (Player *)playerOne {
     if (!_playerOne) {
         _playerOne = [[Player alloc] init];
+        [_playerTwo setRobot:NO];
     }
     return _playerOne;
 }

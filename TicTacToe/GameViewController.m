@@ -108,6 +108,7 @@
     // Check for a winner.
     NSString *winner = [self.game whoWon];
     if (winner) {
+        [self cancelTimer];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Game Over" message:winner preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Start New Game" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self startNewGame];
@@ -205,6 +206,11 @@
 #pragma mark - Actions
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)tapGesture {
+    // If we're playing the computer, we don't need to respond to touch events.
+    if (self.game.currentPlayer.isRobot) {
+        return;
+    }
+
     CGPoint tapLocation = [tapGesture locationInView:self.view];
 
     UILabel *labelFound = [self findLabelUsingPoint:tapLocation];
@@ -214,6 +220,11 @@
 }
 
 - (IBAction)onLabelDrag:(UIPanGestureRecognizer *)panGesture {
+    // If we're playing the computer, we don't need to respond to pan events;
+    if (self.game.currentPlayer.isRobot) {
+        return;
+    }
+
     CGPoint panLocation = [panGesture locationInView:self.view];
 
     UILabel *gamePiece;
@@ -246,7 +257,6 @@
 
     if (self.game.currentPlayer.isRobot) {
         // Give the impression that the robot is thinking.
-        // Anywhere between 1 and 5 seconds.
         [self.robotButton setTitle:@"Thinking ..." forState:UIControlStateNormal];
         NSUInteger randomSeconds = arc4random_uniform(self.secondsPerTurn);
         [self performSelector:@selector(robotMakesSelection) withObject:nil afterDelay:randomSeconds];
