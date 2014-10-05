@@ -17,8 +17,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *playerOneGamePiece;
 @property (nonatomic, weak) IBOutlet UILabel *playerTwoGamePiece;
 @property (nonatomic, weak) IBOutlet UIButton *robotButton;
-@property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic, weak) IBOutlet UILabel *timerLabel;
+@property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic) NSTimeInterval secondsPerTurn;
 
 @end
@@ -93,7 +93,6 @@
 }
 
 - (void)markGameBoardLabel:(UILabel *)gameBoardLabel {
-    [self cancelTimer];
     // Set the attributes of the label
     gameBoardLabel.text = self.game.currentPlayer.token;
 
@@ -163,7 +162,9 @@
     }
     self.playerOneGamePiece.hidden = YES;
     self.playerTwoGamePiece.hidden = YES;
-    self.timerLabel.text = @"0:00";
+    [self.robotButton setTitle:@"Robot is OFF" forState:UIControlStateNormal];
+    self.robotButton.backgroundColor = [UIColor darkGrayColor];
+    self.timerLabel.hidden = YES;
 }
 
 - (void)startNewGame {
@@ -177,16 +178,20 @@
 - (void)startTimer {
     self.secondsPerTurn = self.game.secondsPerTurn;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
-    self.timerLabel.text = [NSString stringWithFormat:@"%@", @(self.secondsPerTurn)];
+    self.timerLabel.hidden = NO;
+    self.timerLabel.text = [NSString stringWithFormat:@"0:%@", @(self.secondsPerTurn)];
 }
 
 - (void)updateTimerLabel {
     self.secondsPerTurn--;
-    self.timerLabel.text = [NSString stringWithFormat:@"%@", @(self.secondsPerTurn)];
+    if (self.secondsPerTurn == 10) {
+        self.timerLabel.text = [NSString stringWithFormat:@"0:%@", @(self.secondsPerTurn)];
+    } else {
+        self.timerLabel.text = [NSString stringWithFormat:@"0:0%@", @(self.secondsPerTurn)];
+    }
 
     if ((self.secondsPerTurn) == 0) {
         [self changePlayerTurn];
-        [self cancelTimer];
     }
 }
 
